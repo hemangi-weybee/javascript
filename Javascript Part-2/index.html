@@ -8,9 +8,25 @@
 </head>
 <body>
     <h1>Javascript Part-2</h1>
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 
+    <!-- Task by Mentor -->
 
+    <script>
+        const abc = [["fenny", "nishita", ["charmi", "hardi", "hemangi"]]];
+
+        for (let i = 0; i < abc.length; i++) {
+            for (let j = 0; j < abc[i].length; j++) {
+                if(typeof abc[i][j] == 'object'){
+                    for (let k = 0; k < abc[i][j].length; k++) {
+                        console.log(abc[i][j][k]);
+                    }
+                } else {
+                    console.log(abc[i][j]);
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
