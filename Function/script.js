@@ -23,23 +23,32 @@ const user = {
     passport: 100100100,
 };
 
-const checkIn = function (flight, user) {
+const checkIn = function (flight, newUser) {
     flight = 'abcd';
-    user.name = 'Mr.' + user.name;
+    newUser.name = 'Mr.' + newUser.name;
 
-    if(user.passport === 100100100)
-        alert('checked in');
+    if(newUser.passport === 100100100)
+        console.log('checked in');
     else
-        alert('Wrong Passport');
+        console.log('Wrong Passport');
 }
 
-// checkIn(flight, user);
-console.log(flight);
 console.log(user);
+checkIn(flight, user);
+console.log(flight);
 
+const newPass = function (u) {
+    u.passport = Math.trunc(Math.random() * 100000000);
+};
+
+newPass(user);
+console.log(user);
+checkIn(flight,user);
 
 //////////////////////////////////////////
 //Callback Function
+
+// console.clear();
 
 const oneWord = function (str) {
     return str.replace(/ /g,'').toLowerCase();
@@ -57,8 +66,8 @@ const transformer = function(str, fn) {
     console.log(`Transformed By: ${fn.name}`);
 }
 
-transformer('Js is good!', upperFirstWord);
-transformer('Js is good!', oneWord);
+transformer('Hello there!', upperFirstWord);
+transformer('Hello World !', oneWord);
 
 const high5 = function () {
     console.log('👋');
@@ -68,22 +77,25 @@ const high5 = function () {
 
 // ['abc', 'xyz', 'pqr'].forEach(high5);
 
-// const greet = function(greetings) {
-//     return function(name) {
-//         console.log(`${greetings} ${name}`);
-//     }
-// }
 
-// const a = greet('hii');
-// greet('hello')('xyz');
-// console.log(a('ABC'));
-
-
-const greet = greetings => name => console.log(`${greetings} ${name}`);
-
-const a = greet('hii');
+const greet = function(greetings) {
+    return function (name) {
+        console.log(`${greetings} ${name}`);
+    }
+}
 greet('hello')('xyz');
-console.log(a('ABC'));
+const newGreet = greet('hloooooooo');
+newGreet('ABC');
+console.dir(newGreet);
+
+
+const greetHii = greetings => name => console.log(`${greetings} ${name}`);
+
+greetHii('hii')('xyz');
+const newGreetHii = greetHii('hiiiiiiiiiii');
+newGreetHii('ABC');
+console.dir(newGreetHii);
+
 
 
 //////////////////////////////////////////
@@ -171,11 +183,11 @@ document.querySelector('.buy').addEventListener('click', airIndia.buyPlane.bind(
 /////////////////////////////////////////
 // partial Application
 
+
 const addTax = (rate, value) => value + value*rate;
-const newCalcTax = addTax.bind(null, 0.23);
+const newCalcTax = addTax.bind(null, 0.10);
 
 console.log(newCalcTax(100));
-console.log(newCalcTax(23));
 
 ////////////////////////////////////////
 // function return function
@@ -186,6 +198,13 @@ const addTaxRate = function (rate) {
     };
 }
 
+// console.clear();
+
+const calcVAT = rate => val => val + val*rate;
+
+const totalVal = calcVAT(0.25);
+console.log(totalVal(100));
+
 const addVAT = addTaxRate(0.23);
 console.log(addVAT(100));
 
@@ -193,7 +212,7 @@ console.log(addVAT(100));
 //////////////////////////////////////
 // IIFE
 
-console.clear();
+// console.clear();
 
 
 (function () {
@@ -217,7 +236,7 @@ console.log(notSecure);
 // Closure of function
 
 
-console.clear();
+// console.clear();
 
 const outerFunction = (a) => {
     let b = 10;
@@ -260,7 +279,7 @@ f();
 console.dir(f);
 
 //////////Example 2 
-console.clear();
+// console.clear();
 
 const board = function (n, wait) {
     let passenger = n/3;
@@ -274,4 +293,3 @@ const board = function (n, wait) {
 }
 
 board(15,5);
-console.dir(setTimeout);
