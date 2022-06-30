@@ -140,12 +140,12 @@ document.querySelector('button').addEventListener('click', function () {
     console.log(text);
     const rows = text.split('\n');
 
-    for (const [i,n] of rows.entries()) {
+    for (const [,n] of rows.entries()) {
         let [word1,word2] = n.toLowerCase().trim().split('_');
         word2 = word2.replace(word2[0], word2[0].toUpperCase());
         
         const newStr = [word1, word2].join('');
         console.log(newStr);
-        document.querySelector('div').textContent += (newStr+"\n");
+        document.querySelector('div').textContent += (newStr + "\n");
     }
 });
