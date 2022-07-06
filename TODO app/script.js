@@ -91,7 +91,7 @@ btnAdd.addEventListener('click', function () {
     if (inputBox.value.trim()) {
         const newTask = {};
         newTask.id = ++generateId;
-        newTask.title = inputBox.value;
+        newTask.title = inputBox.value.trim();
         newTask.completed = false;
         inputBox.value = '';
         tasks.push(newTask);
@@ -106,7 +106,7 @@ btnSearch.addEventListener('click', function () {
     btnSearch.classList.add('activeMainControl');
 
     if (inputBox.value.trim()) {
-        const data = inputBox.value;
+        const data = inputBox.value.trim();
         const searched = tasks.filter(t => t.title.toLowerCase().includes(data.toLowerCase()));
         displayTasks(searched);
     } else {
