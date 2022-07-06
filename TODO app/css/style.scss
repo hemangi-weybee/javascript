@@ -1,0 +1,175 @@
+:root {
+    --primary-color : #1E90FF;
+    --border-color : #C0C0C0;
+    --shadow-color : #87CEEB;    
+}
+
+section {
+    width: 70%;
+    margin: auto;
+    font-size: 12px;
+    font-family: Verdana;
+
+    .head {
+        h1 {
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+
+    .inputBar {
+        display: none;
+        input {
+            width: 100%;
+            padding: 5px;
+
+            &:focus {
+                outline-color : var(--primary-color) !important;
+                box-shadow: 1px 1px 5px 3px var(--shadow-color);
+            }
+        }
+    }
+
+    .listBox {
+        .listRow{
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+
+            .listHead {
+                display: inline-flex;
+                margin: 5px 5px;
+                width: 100%;
+                .title {
+                    width: 95%;
+                    margin-left: 10px;
+
+                    input {
+                        width: 100%;
+                        padding: 5px;
+                    }
+                }
+            }
+
+            .listControl {
+                display: inline-flex;
+                button {
+                    cursor: pointer;
+                    border: none;
+                    margin: auto 10px;
+                    padding: 5px;
+                }
+            } 
+        }
+    }
+
+    .images {
+        height: 15px;
+    }
+
+    .controls {
+        margin: 25px 0px;
+
+        .mainControls {
+            display: flex;
+            justify-content: space-evenly;
+            button {
+                cursor: pointer;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid var(--border-color);
+                background-color: var(--primary-color);
+
+                &:active{
+                    background-color: white;
+                    box-shadow: 1px 1px 5px 3px var(--shadow-color);
+                }
+            }    
+            .vl {
+                border-left: 2px solid var(--primary-color);
+                height: 40px;
+                display: none;
+            }        
+        }
+
+        .subControls {
+            display: flex;
+            flex-direction: column;
+            select {
+                margin: 10px 0;
+                padding: 10px 50px 10px 10px;
+                text-align-last: left;
+                border-radius: 5px;
+                border-color: var(--border-color);
+
+                &:hover {
+                    border: 1px solid var(--primary-color);                    
+                    box-shadow: 1px 1px 5px 3px var(--shadow-color);
+                }
+            }
+
+            div{
+                display: inline-table;
+                align-self: center;
+                button {
+                    cursor: pointer;
+                    border: 1px solid var(--primary-color);
+                    padding: 10px;
+                    background: var(--primary-color);
+                }
+            }
+        }
+    }
+}
+
+.activeMainControl {
+    background-color: white !important;
+}
+
+.current {
+    background-color: white !important;
+    border: 1px solid var(--primary-color);
+    box-shadow: 1px 1px 5px 3px var(--shadow-color);
+}
+
+@media only screen and (min-width: 768px) {
+    section {
+        font-size: 15px;
+
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            .mainControls {
+                display: contents;
+            }
+
+            .subControls {
+                display: contents;
+
+                select {
+                    margin: 0;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1080px) {
+    section {
+        .controls {
+            .mainControls {
+                .vl {
+                    display: inline-block;
+                }
+            }
+
+            .subControls {
+                select {
+                    margin: 0;
+                    padding: 10px 50px 10px 10px;
+                }
+            }
+        }
+    }
+}

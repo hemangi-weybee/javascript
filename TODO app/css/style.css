@@ -1,0 +1,145 @@
+:root {
+  --primary-color: #1E90FF;
+  --border-color: #C0C0C0;
+  --shadow-color: #87CEEB;
+}
+
+section {
+  width: 70%;
+  margin: auto;
+  font-size: 12px;
+  font-family: Verdana;
+}
+section .head h1 {
+  text-align: center;
+  cursor: pointer;
+}
+section .inputBar {
+  display: none;
+}
+section .inputBar input {
+  width: 100%;
+  padding: 5px;
+}
+section .inputBar input:focus {
+  outline-color: var(--primary-color) !important;
+  box-shadow: 1px 1px 5px 3px var(--shadow-color);
+}
+section .listBox .listRow {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+section .listBox .listRow .listHead {
+  display: inline-flex;
+  margin: 5px 5px;
+  width: 100%;
+}
+section .listBox .listRow .listHead .title {
+  width: 95%;
+  margin-left: 10px;
+}
+section .listBox .listRow .listHead .title input {
+  width: 100%;
+  padding: 5px;
+}
+section .listBox .listRow .listControl {
+  display: inline-flex;
+}
+section .listBox .listRow .listControl button {
+  cursor: pointer;
+  border: none;
+  margin: auto 10px;
+  padding: 5px;
+}
+section .images {
+  height: 15px;
+}
+section .controls {
+  margin: 25px 0px;
+}
+section .controls .mainControls {
+  display: flex;
+  justify-content: space-evenly;
+}
+section .controls .mainControls button {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: var(--primary-color);
+}
+section .controls .mainControls button:active {
+  background-color: white;
+  box-shadow: 1px 1px 5px 3px var(--shadow-color);
+}
+section .controls .mainControls .vl {
+  border-left: 2px solid var(--primary-color);
+  height: 40px;
+  display: none;
+}
+section .controls .subControls {
+  display: flex;
+  flex-direction: column;
+}
+section .controls .subControls select {
+  margin: 10px 0;
+  padding: 10px 50px 10px 10px;
+  -moz-text-align-last: left;
+       text-align-last: left;
+  border-radius: 5px;
+  border-color: var(--border-color);
+}
+section .controls .subControls select:hover {
+  border: 1px solid var(--primary-color);
+  box-shadow: 1px 1px 5px 3px var(--shadow-color);
+}
+section .controls .subControls div {
+  display: inline-table;
+  align-self: center;
+}
+section .controls .subControls div button {
+  cursor: pointer;
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  background: var(--primary-color);
+}
+
+.activeMainControl {
+  background-color: white !important;
+}
+
+.current {
+  background-color: white !important;
+  border: 1px solid var(--primary-color);
+  box-shadow: 1px 1px 5px 3px var(--shadow-color);
+}
+
+@media only screen and (min-width: 768px) {
+  section {
+    font-size: 15px;
+  }
+  section .controls {
+    display: flex;
+    justify-content: space-around;
+  }
+  section .controls .mainControls {
+    display: contents;
+  }
+  section .controls .subControls {
+    display: contents;
+  }
+  section .controls .subControls select {
+    margin: 0;
+    padding: 10px;
+  }
+}
+@media only screen and (min-width: 1080px) {
+  section .controls .mainControls .vl {
+    display: inline-block;
+  }
+  section .controls .subControls select {
+    margin: 0;
+    padding: 10px 50px 10px 10px;
+  }
+}/*# sourceMappingURL=style.css.map */
