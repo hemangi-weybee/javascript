@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section>
+        <div class="head">
+            <h1>Elevator System</h1>
+            <hr>
+        </div>
+
+        <div class="mainBox">
+            <div class="elevatorsBox">
+                <div class="line">
+                    <div class="elevatorLine">
+                        <div class="elevator" id="ele-1">
+                            <div class="eleFloorNo">1</div>
+                            <div class="door active-left leftDoor"></div>
+                            <div class="door active-right rightDoor"></div>
+                        </div>
+                    </div>
+                    <div class="toggleElevator">
+                        <label class="switch">
+                            <input type="checkbox" name="lift" class="lift" onclick="maintenance(0)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <div class="elevatorLine">
+                        <div class="elevator" id="ele-2">
+                            <div class="eleFloorNo">1</div>
+                            <div class="door active-left leftDoor"></div>
+                            <div class="door active-right rightDoor"></div>
+                        </div>
+                    </div>
+                    <div class="toggleElevator">
+                        <label class="switch">
+                            <input type="checkbox" name="lift" class="lift" onclick="maintenance(1)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="line">
+                    <div class="elevatorLine">
+                        <div class="elevator" id="ele-3">
+                            <div class="eleFloorNo">1</div>
+                            <div class="door"></div>
+                        </div>
+                    </div>
+                    <div class="toggleElevator">
+                        <label class="switch">
+                            <input type="checkbox" name="lift" class="lift" onclick="maintenance(2)">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="line">
+                    <div class="floorBox">
+                        <div class="allFloor">
+                            <div class="floorNo">1</div>
+                            <button id="up1" onclick="moveup(1)"><img src="images/up.svg" alt=""></button>
+                        </div>
+                        <div class="allFloor">
+                            <div class="floorNo">2</div>
+                            <button id="up2" onclick="moveup(2)"><img src="images/up.svg" alt=""></button>
+                            <button id="down2" onclick="movedown(2)"><img src="images/down.svg" alt=""></button>
+                        </div>
+                        <div class="allFloor">
+                            <div class="floorNo">3</div>
+                            <button id="up3" onclick="moveup(3)"><img src="images/up.svg" alt=""></button>
+                            <button id="down3" onclick="movedown(3)"><img src="images/down.svg" alt=""></button>
+                        </div>
+                        <div class="allFloor">
+                            <div class="floorNo">4</div>
+                            <button id="up4" onclick="moveup(4)"><img src="images/up.svg" alt=""></button>
+                            <button id="down4" onclick="movedown(4)"><img src="images/down.svg" alt=""></button>
+                        </div>
+                        
+                        <div class="allFloor">
+                            <div class="floorNo">5</div>
+                            <button id="down5" onclick="movedown(5)"><img src="images/down.svg" alt=""></button>
+                        </div>
+                    </div>
+                    <div class="maintenanceHead"> Maintenance </div>
+                </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

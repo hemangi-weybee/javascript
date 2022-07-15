@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  background: cyan;
+  z-index: 999;
+}
+#animate {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  background-color: gray;
+  z-index: 1;
+  text-align : center;
+}
+</style>
+<body>
+
+<p><button onclick="myMove()">Click Me</button></p> 
+
+<div id ="container">
+  <div id ="animate"></div>
+</div>
+
+<script>
+function myMove() {
+  let id = null;
+  const elem = document.getElementById("animate");   
+  let pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 400) {
+      clearInterval(id);
+    } else {
+      pos++;
+      elem.style.top = pos + "px"; 
+      if(pos < 100) document.getElementById("animate").innerHTML = "5";
+      else if (pos >= 100 && pos < 200) document.getElementById("animate").innerHTML = "4";
+      else if (pos >= 200 && pos < 300) document.getElementById("animate").innerHTML = "3";
+      else if (pos >= 300 && pos < 400) document.getElementById("animate").innerHTML = "2";
+      else document.getElementById("animate").innerHTML = "1";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
