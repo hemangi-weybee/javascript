@@ -37,27 +37,26 @@ const moves = function (liftNo, steps, where) {
         if (pos == destination) {
             ele.style.top = pos+"px";
             document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = steps;
+
             if(where != null) {
                 where === 0 ? downbtn.style.backgroundColor = "#ffffff" : upbtn.style.backgroundColor = "#ffffff";
             }
-            if(toogle[liftNo].checked) door.style.left = "2px";
-            else door.style.left = "-100%";
+
+            toogle[liftNo].checked ? door.style.left = "2px" : door.style.left = "-100%";
             clearInterval(id);
+
         } else {
             pos < destination ? pos++ : pos--;
             ele.style.top = pos + "px";
+
             if(i === eleHeight) {
                 i = 0;
                 pos < destination ? f-- : f++;
-            } else {
-                i++;
-            }
+            } else  i++;
+
             document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = f;
         }
     }
-
-    
-    
 }
 
 const closest = function (arr, goal, where) {
@@ -85,13 +84,11 @@ const closest = function (arr, goal, where) {
 
 const moveup = function (goal) {
     const floorData = liftData.map(t => t.isMaintenance ? 9999 : t.curFloor);
-    console.log(floorData);
     moves(closest(floorData, goal, 1), goal, 1);   //for up 1
 }
 
 const movedown = function (goal) {
     const floorData = liftData.map(t => t.isMaintenance ? 9999 : t.curFloor);
-    console.log(floorData);
     moves(closest(floorData, goal, 0), goal, 0);  //for down 0
 }
 
@@ -123,7 +120,7 @@ const displayLift = function () {
         const liftsHTML = `
         <div class="line">
             <div class="elevatorLine" style="height: ${totalFloors*eleHeight}px">
-                <div class="elevator" style="height: ${eleHeight}px;" id="ele-${index}"> 
+                <div class="elevator" id="ele-${index}"> 
                     <div class="eleFloorNo">1</div>
                     <div class="door"></div>
                 </div>
@@ -148,20 +145,20 @@ const displayLift = function () {
         let displayFloorHTML;
         if(i === 1 ) {
             displayFloorHTML = `                
-                        <div class="allFloor" style="height: ${eleHeight}px">
+                        <div class="allFloor">
                             <div class="floorNo">${i}</div>
                             <button class="upbtn" onclick="moveup(${i})"><img src="images/up.svg" alt=""></button>
                         </div>`;
         } else if (i === totalFloors) {
             displayFloorHTML = `
-                        <div class="allFloor" style="height: ${eleHeight}px">
+                        <div class="allFloor">
                             <div class="floorNo">${i}</div>
                             <button class="downbtn" onclick="movedown(${i})"><img src="images/down.svg" alt=""></button>
                         </div>
                         `;
         } else {
             displayFloorHTML = `
-                        <div class="allFloor" style="height: ${eleHeight}px">
+                        <div class="allFloor">
                             <div class="floorNo">${i}</div>
                             <button class="upbtn" onclick="moveup(${i})"><img src="images/up.svg" alt=""></button>
                             <button class="downbtn" onclick="movedown(${i})"><img src="images/down.svg" alt=""></button>

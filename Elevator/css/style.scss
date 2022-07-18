@@ -8,7 +8,6 @@
     --elevator-line-width: 120px;
     --elevator-line-height: 500px;
     --elevator-box-height: 550px;
-    --calc-top : 280;
 }
 
 section {
@@ -48,10 +47,7 @@ section {
 
                     .elevator {
                         position: absolute;
-                        top: 0;
                         left: 10px;
-                        right: 10px;
-                        bottom: 0;
                         overflow: hidden;
                         height: var(--ele-box-height);
                         width: var(--ele-box-width);
@@ -72,8 +68,6 @@ section {
                             width:95%;
                             height:73px;
                             top:25px;
-                            left: 2px;
-                            left: -100%;
                             position:absolute;
                             transition:all 300ms ease-in;
                         }
@@ -183,20 +177,3 @@ section {
         }
     }
 }
-
-// @media only screen and (min-width: 1400px) {
-//     section {
-//         .mainBox {
-//             .elevatorsBox {
-//                 .line {
-//                     .elevatorLine {
-//                         // dfsd
-//                         .elevator {
-//                             //fsdf
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
