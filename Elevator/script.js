@@ -7,7 +7,7 @@ const containerElevator = document.getElementsByClassName('elevatorsBox')[0];
 
 //lift data
 const lifts = 3;
-const totalFloors = 9;
+const totalFloors = 5;
 const liftData = [];
 const eleHeight = 100;
 
