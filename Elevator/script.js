@@ -9,18 +9,17 @@ const containerElevator = document.getElementsByClassName('elevatorsBox')[0];
 const lifts = 3;
 const totalFloors = 9;
 const liftData = [];
-const eleHeight = 80;
+const eleHeight = 100;
 
 //Core Functions
 const moves = function (liftNo, steps, where) {
 
+    const downbtn = document.getElementsByClassName("downbtn")[steps-2];
+    const upbtn = document.getElementsByClassName("upbtn")[steps-1];
+    const door = document.getElementsByClassName('door')[liftNo];
     if(where != null) {
-        where === 0 ? 
-        document.getElementsByClassName("downbtn")[steps-2].style.backgroundColor = "#eb1f48" :
-        document.getElementsByClassName("upbtn")[steps-1].style.backgroundColor = "#eb1f48";
+        where === 0 ? downbtn.style.backgroundColor = "#eb1f48" : upbtn.style.backgroundColor = "#eb1f48";
     }
-
-    // document.getElementsByClassName("leftDoor")[liftNo].style.right
 
     let id = null;
     let i=0, f = liftData[liftNo].curFloor;
@@ -31,18 +30,19 @@ const moves = function (liftNo, steps, where) {
     liftData[liftNo].curFloor = steps;
 
     clearInterval(id);
-    id = setInterval(frame, 3);
-    
+    id = setInterval(frame, 5);
+    door.style.left = "2px";
+
     function frame() {
         if (pos == destination) {
             ele.style.top = pos+"px";
-            elevators[liftNo].innerHTML = steps;
-            clearInterval(id);
+            document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = steps;
             if(where != null) {
-                where === 0 ? 
-                document.getElementsByClassName("downbtn")[steps-2].style.backgroundColor = "#ffffff" :
-                document.getElementsByClassName("upbtn")[steps-1].style.backgroundColor = "#ffffff";
+                where === 0 ? downbtn.style.backgroundColor = "#ffffff" : upbtn.style.backgroundColor = "#ffffff";
             }
+            if(toogle[liftNo].checked) door.style.left = "2px";
+            else door.style.left = "-100%";
+            clearInterval(id);
         } else {
             pos < destination ? pos++ : pos--;
             ele.style.top = pos + "px";
@@ -52,9 +52,11 @@ const moves = function (liftNo, steps, where) {
             } else {
                 i++;
             }
-            elevators[liftNo].innerHTML = f;
+            document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = f;
         }
     }
+
+    
     
 }
 
@@ -97,11 +99,13 @@ const maintenance = function (lift) {
     
     if (toogle[lift].checked) {
         liftData[lift].isMaintenance = true;
-        elevators[lift].style.boxShadow = "inset 0px 0px 0px 2px #eb1f48";
         moves(lift, 1, null);
+        elevators[lift].style.boxShadow = "inset 0px 0px 0px 2px #eb1f48";
+        document.getElementsByClassName('door')[lift].style.left = "2px";
     } else {
         liftData[lift].isMaintenance = false;
-        elevators[lift].style.boxShadow = "none";
+        elevators[lift].style.boxShadow = "inset 0px 0px 0px 2px black";
+        document.getElementsByClassName('door')[lift].style.left = "-100%";
     }
 
     const allButton = document.getElementsByTagName("button");
@@ -119,9 +123,9 @@ const displayLift = function () {
         const liftsHTML = `
         <div class="line">
             <div class="elevatorLine" style="height: ${totalFloors*eleHeight}px">
-                <div class="elevator" style="height: ${eleHeight}px;" id="ele-${index}"> ${index+1}
-                    <!--<div class="door active-left leftDoor"></div>
-                    <div class="door active-right rightDoor"></div>-->
+                <div class="elevator" style="height: ${eleHeight}px;" id="ele-${index}"> 
+                    <div class="eleFloorNo">1</div>
+                    <div class="door"></div>
                 </div>
             </div>
             <div class="toggleElevator">
@@ -176,21 +180,3 @@ const init = function () {
     });
 }
 init();
-
-
-/* 
-<div class="line">
-            <div class="elevatorLine" style="height: ${totalFloors*eleHeight}px">
-                <div class="elevator" style="height: ${eleHeight}px;" id="ele-${index}">${index + 1}
-                    <div class="door active-left leftDoor"></div>
-                    <div class="door active-right rightDoor"></div>
-                </div>
-            </div>
-            <div class="toggleElevator">
-                <label class="switch">
-                    <input type="checkbox" name="lift" class="lift" onclick="maintenance(${index})">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>`;
-*/
