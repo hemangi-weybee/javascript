@@ -14,72 +14,75 @@ const eleHeight = 100;
 //Core Functions
 const moves = function (liftNo, steps, where) {
 
-    const downbtn = document.getElementsByClassName("downbtn")[steps-2];
-    const upbtn = document.getElementsByClassName("upbtn")[steps-1];
+    const downbtn = document.getElementsByClassName("downbtn")[steps - 2];
+    const upbtn = document.getElementsByClassName("upbtn")[steps - 1];
     const door = document.getElementsByClassName('leftdoor')[liftNo];
     const rdoor = document.getElementsByClassName('rightdoor')[liftNo];
-    if(where != null) {
+    if (where != null) {
         where === 0 ? downbtn.style.backgroundColor = "#eb1f48" : upbtn.style.backgroundColor = "#eb1f48";
     }
 
     let id = null;
-    let i=0, f = liftData[liftNo].curFloor;
+    let i = 0, f = liftData[liftNo].curFloor, delay = 0;
     const ele = elevators[liftNo];
 
-    let pos = (totalFloors - liftData[liftNo].curFloor)*eleHeight;
-    let destination = (totalFloors - steps)*eleHeight;
+    let pos = (totalFloors - liftData[liftNo].curFloor) * eleHeight;
+    let destination = (totalFloors - steps) * eleHeight;
     liftData[liftNo].curFloor = steps;
 
     clearInterval(id);
     id = setInterval(frame, 7);
-    // door.style.left = "2px";
-    // rdoor.style.right = "2px";
+    door.style.left = "2px";
+    rdoor.style.right = "2px";
 
     function frame() {
         if (pos == destination) {
-            ele.style.top = pos+"px";
+            ele.style.top = pos + "px";
             document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = steps;
 
-            if(where != null) {
+            if (where != null) {
                 where === 0 ? downbtn.style.backgroundColor = "#ffffff" : upbtn.style.backgroundColor = "#ffffff";
             }
 
-            if(toogle[liftNo].checked) {
+            if (toogle[liftNo].checked) {
                 door.style.left = "2px";
                 rdoor.style.right = "2px";
-            }  else {
+            } else {
                 door.style.left = "-100%";
                 rdoor.style.right = "-100%";
-            } 
+            }
             clearInterval(id);
 
         } else {
-            pos < destination ? pos++ : pos--;
-            ele.style.top = pos + "px";
+            if (delay < 100) delay++;
+            else {
+                pos < destination ? pos++ : pos--;
+                ele.style.top = pos + "px";
 
-            if(i === eleHeight) {
-                i = 0;
-                pos < destination ? f-- : f++;
-            } else  i++;
+                if (i === eleHeight) {
+                    i = 0;
+                    pos < destination ? f-- : f++;
+                } else i++;
 
-            document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = f;
+                document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = f;
+            }
         }
     }
 }
 
 const closest = function (arr, goal, where) {
-    if(arr.every(v => v === arr[0])) {
+    if (arr.every(v => v === arr[0])) {
         let l = Math.floor(Math.random() * lifts);
-        if(l < 0) l = 0;
+        if (l < 0) l = 0;
         return (l);
     }
     else {
-        if(arr.indexOf(goal) === -1){
+        if (arr.indexOf(goal) === -1) {
             const val = arr.reduce(function (acc, cur) {
-                if(Math.abs(cur - goal) < Math.abs(acc - goal)) return cur;
-                else if(Math.abs(cur - goal) > Math.abs(acc - goal)) return acc; 
+                if (Math.abs(cur - goal) < Math.abs(acc - goal)) return cur;
+                else if (Math.abs(cur - goal) > Math.abs(acc - goal)) return acc;
                 else {
-                    if(where === 1) return Math.min(cur, acc);
+                    if (where === 1) return Math.min(cur, acc);
                     else return Math.max(cur, acc);
                 }
             });
@@ -92,22 +95,16 @@ const closest = function (arr, goal, where) {
 
 const moveup = function (goal) {
     const floorData = liftData.map(t => t.isMaintenance ? 9999 : t.curFloor);
-    const liftNo = closest(floorData, goal, 1);
-    document.getElementsByClassName('leftdoor')[liftNo].style.left = "2px";
-    document.getElementsByClassName('rightdoor')[liftNo].style.right = "2px";
-    moves(liftNo, goal, 1);   //for up 1
+    moves(closest(floorData, goal, 1), goal, 1);   //for up 1
 }
 
 const movedown = function (goal) {
-    const floorData = liftData.map(t => t.isMaintenance ? 9999 : t.curFloor);
-    const liftNo = closest(floorData, goal, 1);
-    document.getElementsByClassName('leftdoor')[liftNo].style.left = "2px";
-    document.getElementsByClassName('rightdoor')[liftNo].style.right = "2px";
-    moves(liftNo, goal, 0);  //for down 0
+    const floorData = liftData.map(t => t.isMaintenance ? 9999 : t.curFloor);   
+    moves(closest(floorData, goal, 0), goal, 0);  //for down 0
 }
 
 const maintenance = function (lift) {
-    
+
     if (toogle[lift].checked) {
         liftData[lift].isMaintenance = true;
         moves(lift, 1, null);
@@ -120,20 +117,20 @@ const maintenance = function (lift) {
     }
 
     const allButton = document.getElementsByTagName("button");
-    if(liftData.every(l => l.isMaintenance)) for (const btn of allButton) btn.disabled  = true;
-    else for (const btn of allButton) btn.disabled  = false;
+    if (liftData.every(l => l.isMaintenance)) for (const btn of allButton) btn.disabled = true;
+    else for (const btn of allButton) btn.disabled = false;
 }
 
 
 //UI
 
 const displayLift = function () {
-    containerElevator.style.height = `${(totalFloors*eleHeight)+50}px`;
+    containerElevator.style.height = `${(totalFloors * eleHeight) + 50}px`;
     containerElevator.innerHTML = '';
     for (let index = 0; index < lifts; index++) {
         const liftsHTML = `
         <div class="line">
-            <div class="elevatorLine" style="height: ${totalFloors*eleHeight}px">
+            <div class="elevatorLine" style="height: ${totalFloors * eleHeight}px">
                 <div class="elevator" id="ele-${index}"> 
                     <div class="eleFloorNo">1</div>
                     <div class="leftdoor"></div>
@@ -148,7 +145,7 @@ const displayLift = function () {
             </div>
         </div>`;
         containerElevator.insertAdjacentHTML('beforeend', liftsHTML);
-        liftData.push({ liftNo:index, curFloor: 1, isMaintenance: false});
+        liftData.push({ liftNo: index, curFloor: 1, isMaintenance: false });
     }
 
     const floorBoxHTML = `<div class="line"><div class="floorBox">`;
@@ -158,7 +155,7 @@ const displayLift = function () {
     floorBox.innerHTML = '';
     for (let i = 1; i <= totalFloors; i++) {
         let displayFloorHTML;
-        if(i === 1 ) {
+        if (i === 1) {
             displayFloorHTML = `                
                         <div class="allFloor">
                             <div class="floorNo">${i}</div>
