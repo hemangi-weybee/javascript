@@ -16,7 +16,8 @@ const moves = function (liftNo, steps, where) {
 
     const downbtn = document.getElementsByClassName("downbtn")[steps-2];
     const upbtn = document.getElementsByClassName("upbtn")[steps-1];
-    const door = document.getElementsByClassName('door')[liftNo];
+    const door = document.getElementsByClassName('leftdoor')[liftNo];
+    const rdoor = document.getElementsByClassName('rightdoor')[liftNo];
     if(where != null) {
         where === 0 ? downbtn.style.backgroundColor = "#eb1f48" : upbtn.style.backgroundColor = "#eb1f48";
     }
@@ -30,8 +31,9 @@ const moves = function (liftNo, steps, where) {
     liftData[liftNo].curFloor = steps;
 
     clearInterval(id);
-    id = setInterval(frame, 5);
-    door.style.left = "2px";
+    id = setInterval(frame, 7);
+    // door.style.left = "2px";
+    // rdoor.style.right = "2px";
 
     function frame() {
         if (pos == destination) {
@@ -42,7 +44,13 @@ const moves = function (liftNo, steps, where) {
                 where === 0 ? downbtn.style.backgroundColor = "#ffffff" : upbtn.style.backgroundColor = "#ffffff";
             }
 
-            toogle[liftNo].checked ? door.style.left = "2px" : door.style.left = "-100%";
+            if(toogle[liftNo].checked) {
+                door.style.left = "2px";
+                rdoor.style.right = "2px";
+            }  else {
+                door.style.left = "-100%";
+                rdoor.style.right = "-100%";
+            } 
             clearInterval(id);
 
         } else {
@@ -62,7 +70,7 @@ const moves = function (liftNo, steps, where) {
 const closest = function (arr, goal, where) {
     if(arr.every(v => v === arr[0])) {
         let l = Math.floor(Math.random() * lifts);
-        l = l >=0 ? l : Math.floor(Math.random() * lifts);
+        if(l < 0) l = 0;
         return (l);
     }
     else {
@@ -84,12 +92,18 @@ const closest = function (arr, goal, where) {
 
 const moveup = function (goal) {
     const floorData = liftData.map(t => t.isMaintenance ? 9999 : t.curFloor);
-    moves(closest(floorData, goal, 1), goal, 1);   //for up 1
+    const liftNo = closest(floorData, goal, 1);
+    document.getElementsByClassName('leftdoor')[liftNo].style.left = "2px";
+    document.getElementsByClassName('rightdoor')[liftNo].style.right = "2px";
+    moves(liftNo, goal, 1);   //for up 1
 }
 
 const movedown = function (goal) {
     const floorData = liftData.map(t => t.isMaintenance ? 9999 : t.curFloor);
-    moves(closest(floorData, goal, 0), goal, 0);  //for down 0
+    const liftNo = closest(floorData, goal, 1);
+    document.getElementsByClassName('leftdoor')[liftNo].style.left = "2px";
+    document.getElementsByClassName('rightdoor')[liftNo].style.right = "2px";
+    moves(liftNo, goal, 0);  //for down 0
 }
 
 const maintenance = function (lift) {
@@ -98,11 +112,11 @@ const maintenance = function (lift) {
         liftData[lift].isMaintenance = true;
         moves(lift, 1, null);
         elevators[lift].style.boxShadow = "inset 0px 0px 0px 2px #eb1f48";
-        document.getElementsByClassName('door')[lift].style.left = "2px";
+        document.getElementsByClassName('leftdoor')[lift].style.left = "2px";
     } else {
         liftData[lift].isMaintenance = false;
         elevators[lift].style.boxShadow = "inset 0px 0px 0px 2px black";
-        document.getElementsByClassName('door')[lift].style.left = "-100%";
+        document.getElementsByClassName('leftdoor')[lift].style.left = "-100%";
     }
 
     const allButton = document.getElementsByTagName("button");
@@ -122,7 +136,8 @@ const displayLift = function () {
             <div class="elevatorLine" style="height: ${totalFloors*eleHeight}px">
                 <div class="elevator" id="ele-${index}"> 
                     <div class="eleFloorNo">1</div>
-                    <div class="door"></div>
+                    <div class="leftdoor"></div>
+                    <div class="rightdoor"></div>
                 </div>
             </div>
             <div class="toggleElevator">

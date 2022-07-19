@@ -65,13 +65,25 @@ section .mainBox .elevatorsBox .line .elevatorLine .elevator .eleFloorNo {
   height: 25px;
   color: white;
 }
-section .mainBox .elevatorsBox .line .elevatorLine .elevator .door {
+section .mainBox .elevatorsBox .line .elevatorLine .elevator .leftdoor {
   background: #999a94;
-  width: 95%;
-  height: 73px;
+  width: 45%;
+  height: 70px;
   top: 25px;
   position: absolute;
   transition: all 300ms ease-in;
+  border: 2px solid black;
+  opacity: 70%;
+}
+section .mainBox .elevatorsBox .line .elevatorLine .elevator .rightdoor {
+  background: #999a94;
+  width: 45%;
+  height: 70px;
+  top: 25px;
+  position: absolute;
+  transition: all 300ms ease-in;
+  border: 2px solid black;
+  opacity: 70%;
 }
 section .mainBox .elevatorsBox .line .floorBox {
   width: auto;
