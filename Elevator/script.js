@@ -6,8 +6,10 @@ const toogle = document.getElementsByName('lift');
 const containerElevator = document.getElementsByClassName('elevatorsBox')[0];
 
 //lift data
-const lifts = 3;
-const totalFloors = 5;
+const userLifts = prompt("How many Lift you want ?", "3");
+const lifts = Number(userLifts) ? Number(userLifts) : 3;
+const userFloors = prompt("How many Floors you want ?", "5");
+const totalFloors = Number(userFloors) ? Number(userFloors) : 5;
 const liftData = [];
 const eleHeight = 100;
 
