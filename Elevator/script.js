@@ -30,14 +30,13 @@ const moves = function (liftNo, steps, where) {
 
     let pos = (totalFloors - liftData[liftNo].curFloor) * eleHeight;
     let destination = (totalFloors - steps) * eleHeight;
-    liftData[liftNo].curFloor = steps;
 
     clearInterval(id);
-    id = setInterval(frame, 7);
-    door.style.left = "2px";
-    rdoor.style.right = "2px";
-
+    id = setInterval(frame, 5);
+    
     function frame() {
+        door.style.left = "2px";
+        rdoor.style.right = "2px";
         if (pos == destination) {
             ele.style.top = pos + "px";
             document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = steps;
@@ -46,13 +45,14 @@ const moves = function (liftNo, steps, where) {
                 where === 0 ? downbtn.style.backgroundColor = "#ffffff" : upbtn.style.backgroundColor = "#ffffff";
             }
 
-            if (toogle[liftNo].checked) {
+            if (liftData[liftNo].isMaintenance) {
                 door.style.left = "2px";
                 rdoor.style.right = "2px";
             } else {
                 door.style.left = "-100%";
-                rdoor.style.right = "-100%";
+                rdoor.style.right = "-100%";   
             }
+            liftData[liftNo].curFloor = steps;
             clearInterval(id);
 
         } else {
@@ -112,10 +112,12 @@ const maintenance = function (lift) {
         moves(lift, 1, null);
         elevators[lift].style.boxShadow = "inset 0px 0px 0px 2px #eb1f48";
         document.getElementsByClassName('leftdoor')[lift].style.left = "2px";
+        document.getElementsByClassName('rightdoor')[lift].style.right = "2px";
     } else {
         liftData[lift].isMaintenance = false;
         elevators[lift].style.boxShadow = "inset 0px 0px 0px 2px black";
         document.getElementsByClassName('leftdoor')[lift].style.left = "-100%";
+        document.getElementsByClassName('rightdoor')[lift].style.right = "-100%";
     }
 
     const allButton = document.getElementsByTagName("button");
