@@ -6,10 +6,10 @@ const toogle = document.getElementsByName('lift');
 const containerElevator = document.getElementsByClassName('elevatorsBox')[0];
 
 //lift data
-const userLifts = prompt("How many Lift you want ?", "3");
-const lifts = Number(userLifts) ? Number(userLifts) : 3;
-const userFloors = prompt("How many Floors you want ?", "5");
-const totalFloors = Number(userFloors) ? Number(userFloors) : 5;
+const userLifts = Number(prompt("How many Lift you want ?", "3"));
+const lifts = userLifts ? userLifts : 3;
+const userFloors = Number(prompt("How many Floors you want ?", "5"));
+const totalFloors = userFloors ? userFloors : 5;
 const liftData = [];
 const eleHeight = 100;
 
@@ -25,7 +25,7 @@ const moves = function (liftNo, steps, where) {
     }
 
     let id = null;
-    let i = 0, f = liftData[liftNo].curFloor, delay = 0;
+    let i = 0, floor= liftData[liftNo].curFloor, delay = 0;
     const ele = elevators[liftNo];
 
     let pos = (totalFloors - liftData[liftNo].curFloor) * eleHeight;
@@ -63,10 +63,10 @@ const moves = function (liftNo, steps, where) {
 
                 if (i === eleHeight) {
                     i = 0;
-                    pos < destination ? f-- : f++;
+                    pos < destination ? floor-- : floor++;
                 } else i++;
 
-                document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = f;
+                document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = floor;
             }
         }
     }
