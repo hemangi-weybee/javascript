@@ -33,7 +33,7 @@ const moves = function (liftNo, steps, where) {
 
     clearInterval(id);
     id = setInterval(frame, 5);
-    
+    liftData[liftNo].curFloor = steps;
     function frame() {
         door.style.left = "2px";
         rdoor.style.right = "2px";
