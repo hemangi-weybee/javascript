@@ -16,20 +16,16 @@ const eleHeight = 100;
 //Core Functions
 const moves = function (liftNo, steps, where) {
 
-    const downbtn = document.getElementsByClassName("downbtn")[steps - 2];
-    const upbtn = document.getElementsByClassName("upbtn")[steps - 1];
-    const door = document.getElementsByClassName('leftdoor')[liftNo];
-    const rdoor = document.getElementsByClassName('rightdoor')[liftNo];
-    if (where != null) {
-        where === 0 ? downbtn.style.backgroundColor = "#eb1f48" : upbtn.style.backgroundColor = "#eb1f48";
-    }
-
-    let id = null;
-    let i = 0, floor= liftData[liftNo].curFloor, delay = 0;
+    const downbtn = document.getElementsByClassName("downbtn")[steps - 2], 
+    upbtn = document.getElementsByClassName("upbtn")[steps - 1],
+    door = document.getElementsByClassName('leftdoor')[liftNo],
+    rdoor = document.getElementsByClassName('rightdoor')[liftNo];
+    
+    (where != null) &&  where === 0 ? downbtn.style.backgroundColor = "#eb1f48" : upbtn.style.backgroundColor = "#eb1f48";
+    
+    let id = null, i = 0, floor= liftData[liftNo].curFloor, delay = 0,
+    pos = (totalFloors - liftData[liftNo].curFloor) * eleHeight, destination = (totalFloors - steps) * eleHeight;
     const ele = elevators[liftNo];
-
-    let pos = (totalFloors - liftData[liftNo].curFloor) * eleHeight;
-    let destination = (totalFloors - steps) * eleHeight;
 
     clearInterval(id);
     id = setInterval(frame, 5);
@@ -41,20 +37,12 @@ const moves = function (liftNo, steps, where) {
             ele.style.top = pos + "px";
             document.getElementsByClassName('eleFloorNo')[liftNo].innerHTML = steps;
 
-            if (where != null) {
-                where === 0 ? downbtn.style.backgroundColor = "#ffffff" : upbtn.style.backgroundColor = "#ffffff";
-            }
+            (where != null) && where === 0 ? downbtn.style.backgroundColor = "#ffffff" : upbtn.style.backgroundColor = "#ffffff";
 
-            if (liftData[liftNo].isMaintenance) {
-                door.style.left = "2px";
-                rdoor.style.right = "2px";
-            } else {
-                door.style.left = "-100%";
-                rdoor.style.right = "-100%";   
-            }
+            (liftData[liftNo].isMaintenance) ? door.style.left = rdoor.style.right = "2px" : door.style.left = rdoor.style.right = "-100%";
+            
             liftData[liftNo].curFloor = steps;
             clearInterval(id);
-
         } else {
             if (delay < 100) delay++;
             else {

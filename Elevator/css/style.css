@@ -57,7 +57,7 @@ section .mainBox .elevatorsBox .line .elevatorLine .elevator {
   text-align: center;
   font-weight: bolder;
   box-shadow: inset 0px 0px 0px 2px black;
-  background-image: url(./lift.png);
+  background-image: url(../images/lift.png);
   background-size: 100%;
 }
 section .mainBox .elevatorsBox .line .elevatorLine .elevator .eleFloorNo {

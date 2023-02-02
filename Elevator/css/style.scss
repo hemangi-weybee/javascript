@@ -3,8 +3,8 @@
     --elevator-line-color: #c2d1e6;
     --elevator-color: #666666;
     --maintain-color: #eb1f48;
-    --ele-box-width : 100px;
-    --ele-box-height : 100px;
+    --ele-box-width: 100px;
+    --ele-box-height: 100px;
     --elevator-line-width: 120px;
     --elevator-line-height: 500px;
     --elevator-box-height: 550px;
@@ -54,7 +54,7 @@ section {
                         text-align: center;
                         font-weight: bolder;
                         box-shadow: inset 0px 0px 0px 2px black;
-                        background-image: url(./lift.png);
+                        background-image: url(../images/lift.png);
                         background-size: 100%;
 
                         .eleFloorNo {
@@ -64,24 +64,24 @@ section {
                         }
 
                         .leftdoor {
-                            background:#999a94;
-                            width:45%;
-                            height:70px;
-                            top:25px;
+                            background: #999a94;
+                            width: 45%;
+                            height: 70px;
+                            top: 25px;
                             left: 2px;
-                            position:absolute;
-                            transition:all 150ms ease-in;
+                            position: absolute;
+                            transition: all 150ms ease-in;
                             border: 2px solid black;
                             opacity: 70%;
                         }
                         .rightdoor {
-                            background:#999a94;
-                            width:45%;
+                            background: #999a94;
+                            width: 45%;
                             right: 2px;
-                            height:70px;
-                            top:25px;
-                            position:absolute;
-                            transition:all 150ms ease-in;
+                            height: 70px;
+                            top: 25px;
+                            position: absolute;
+                            transition: all 150ms ease-in;
                             border: 2px solid black;
                             opacity: 70%;
                         }
@@ -92,7 +92,6 @@ section {
                     width: auto;
                     flex-direction: column-reverse;
                     display: flex;
-                    
 
                     .allFloor {
                         height: var(--ele-box-height);
@@ -171,11 +170,11 @@ section {
                         }
                     }
 
-                    input:checked+.slider {
+                    input:checked + .slider {
                         background-color: var(--maintain-color);
                     }
 
-                    input:checked+.slider:before {
+                    input:checked + .slider:before {
                         transform: translateX(25px);
                         background-color: white;
                     }
